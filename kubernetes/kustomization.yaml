@@ -1,0 +1,6 @@
+namespace: cairo-dev
+nameSuffix: -dev
+resources:
+  - cairo-dev.namespace.yaml
+  - api.deployment.yaml
+  - nightshift.cron.yaml
