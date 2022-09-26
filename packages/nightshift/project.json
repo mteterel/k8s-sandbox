@@ -1,0 +1,51 @@
+{
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/nightshift/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/webpack:webpack",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "target": "node",
+        "compiler": "tsc",
+        "outputPath": "dist/packages/nightshift",
+        "main": "packages/nightshift/src/main.ts",
+        "tsConfig": "packages/nightshift/tsconfig.app.json",
+        "assets": ["packages/nightshift/src/assets"]
+      },
+      "configurations": {
+        "production": {
+          "optimization": true,
+          "extractLicenses": true,
+          "inspect": false,
+          "fileReplacements": [
+            {
+              "replace": "packages/nightshift/src/environments/environment.ts",
+              "with": "packages/nightshift/src/environments/environment.prod.ts"
+            }
+          ]
+        }
+      }
+    },
+    "run": {
+      "executor": "@nrwl/js:node",
+      "options": {
+        "buildTarget": "nightshift:build"
+      },
+      "configurations": {
+        "production": {
+          "buildTarget": "nightshift:build:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["packages/nightshift/**/*.ts"]
+      }
+    }
+  },
+  "tags": []
+}

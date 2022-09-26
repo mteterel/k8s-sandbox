@@ -1,0 +1,23 @@
+{
+  "extends": "nx/presets/npm.json",
+  "$schema": "./node_modules/nx/schemas/nx-schema.json",
+  "npmScope": "mteterel-k8s-sandbox",
+  "affected": {
+    "defaultBase": "master"
+  },
+  "tasksRunnerOptions": {
+    "default": {
+      "runner": "@nrwl/nx-cloud",
+      "options": {
+        "cacheableOperations": ["build", "lint", "test", "e2e"],
+        "accessToken": "ZGJiZTZmMDMtNTYzZS00NTgxLThhNTgtZmI3MDI2ZDY0ZTkwfHJlYWQtd3JpdGU="
+      }
+    }
+  },
+  "defaultProject": "api",
+  "targetDefaults": {
+    "lint": {
+      "inputs": ["default", "{workspaceRoot}/.eslintrc.json"]
+    }
+  }
+}
