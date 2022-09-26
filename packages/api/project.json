@@ -45,6 +45,16 @@
       "options": {
         "lintFilePatterns": ["packages/api/**/*.ts"]
       }
+    },
+    "deploy": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "commands": [
+          "docker build -f ./packages/api/Dockerfile . -t sandbox-api"
+        ],
+        "parallel": false
+      },
+      "dependsOn": ["build"]
     }
   },
   "tags": []

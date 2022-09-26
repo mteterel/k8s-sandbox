@@ -5,14 +5,18 @@
   "targets": {
     "build": {
       "executor": "@nrwl/webpack:webpack",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "options": {
         "target": "node",
         "compiler": "tsc",
         "outputPath": "dist/packages/nightshift",
         "main": "packages/nightshift/src/main.ts",
         "tsConfig": "packages/nightshift/tsconfig.app.json",
-        "assets": ["packages/nightshift/src/assets"]
+        "assets": [
+          "packages/nightshift/src/assets"
+        ]
       },
       "configurations": {
         "production": {
@@ -41,10 +45,24 @@
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
-      "outputs": ["{options.outputFile}"],
+      "outputs": [
+        "{options.outputFile}"
+      ],
       "options": {
-        "lintFilePatterns": ["packages/nightshift/**/*.ts"]
+        "lintFilePatterns": [
+          "packages/nightshift/**/*.ts"
+        ]
       }
+    },
+    "deploy": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "commands": [
+          "docker build -f ./packages/nightshift/Dockerfile . -t sandbox-nightshift"
+        ],
+        "parallel": false
+      },
+      "dependsOn": ["build"]
     }
   },
   "tags": []
